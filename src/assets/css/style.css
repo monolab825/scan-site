@@ -142,4 +142,5 @@ dd {
     background-color: #fff;
     border-radius: 35px;
     overflow: hidden;
+    box-shadow: rgb(111 81 216) 0px 5px 10px;
 }
