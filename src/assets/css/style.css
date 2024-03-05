@@ -138,3 +138,8 @@ dd {
 .exampleLink{
     opacity: 0.6;
 }
+.validationForm {
+    background-color: #fff;
+    border-radius: 35px;
+    overflow: hidden;
+}
