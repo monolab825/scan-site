@@ -2,8 +2,15 @@ html {
     min-height: 100%;
 }
 
+img {
+    max-width: 100%;
+}
+body, html{
+    overflow-x: hidden;
+}
 body {
     height: 100vh;
+    color: rgba(9, 37, 64, .6);
 }
 
 h1,
@@ -13,6 +20,7 @@ h4,
 h5,
 h6 {
     margin-bottom: 15px;
+    color: rgb(9 37 64);
 }
 
 a {
@@ -55,7 +63,9 @@ h4,
 }
 
 h5,
-.h5 {}
+.h5 {
+    font-size: 18px;
+}
 
 .mb-05 {
     margin-bottom: 5px !important;
@@ -163,6 +173,11 @@ h5,
     background-color: #fff;
 }
 
+.leftContent {
+    position: sticky;
+    top: 0;
+}
+
 .leftCol ul {
     list-style: none;
     padding: 20px;
@@ -170,8 +185,15 @@ h5,
 
 .leftCol ul li {
     text-align: center;
-    font-size: 12px;
-    margin: 20px 0;
+    font-size: 11px;
+    margin: 25px 0;
+    color: rgb(9 37 64 / 40%);
+    font-weight: 500;
+}
+
+.leftCol ul li i {
+    display: block;
+    margin: 0 auto;
 }
 
 .rightCol {
@@ -203,3 +225,60 @@ dd {
 .exampleLink {
     opacity: 0.6;
 }
+
+.material-symbols-outlined.smallIcon {
+    font-size: 18px;
+}
+
+.webImg {
+    position: absolute;
+    left: 16%;
+    right: 16%;
+    top: 6%;
+    transition: all 0.3s ease-in-out 0.1s;
+}
+
+.websiteImg:hover .webImg {
+    top: -100%;
+}
+
+@media (max-width: 1199.98px) {
+    h1,
+    .h1 {
+        font-size: 30px;
+    }
+
+    h2,
+    .h2 {
+        font-size: 23px;
+    }
+   
+}
+
+@media (max-width: 991.98px) {
+   
+    
+}
+
+
+@media (max-width: 767.98px) {
+    .rightCol{
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .container-fluid, .container{
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .ratingInfo p{
+        font-size: 13px;
+    }
+    .ratingInfo h2{
+        font-size: 17px;
+    }
+    .ratingInfo h5{
+        font-size: 14px;
+    }
+}
+
+@media (max-width:575.98px) {}
