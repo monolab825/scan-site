@@ -1,146 +1,205 @@
-html{
+html {
     min-height: 100%;
 }
-body{
+
+body {
     height: 100vh;
 }
-h1, h2, h3, h4, h5, h6{
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin-bottom: 15px;
 }
-a{
+
+a {
     text-decoration: none;
     color: inherit;
 }
-ul{
+
+ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-p{
+
+p {
     margin-bottom: 20px;
 }
-h1, .h1{
- font-size: 40px;
- font-weight: 700;
+
+h1,
+.h1 {
+    font-size: 40px;
+    font-weight: 700;
 }
-h2, .h2{
+
+h2,
+.h2 {
     font-size: 30px;
     font-weight: 700;
 }
-h3, .h3{
+
+h3,
+.h3 {
     font-size: 25px;
-    
+
 }
-h4, .h4{
+
+h4,
+.h4 {
     font-size: 20px;
-  
+
 }
-h5, .h5{
-    
-}
-.mb-05{
+
+h5,
+.h5 {}
+
+.mb-05 {
     margin-bottom: 5px !important;
 }
-.mb-1{
+
+.mb-1 {
     margin-bottom: 10px !important;
 }
-.mb-2{
+
+.mb-2 {
     margin-bottom: 20px !important;
 }
-.mb-3{
+
+.mb-3 {
     margin-bottom: 30px !important;
 }
-.mb-4{
+
+.mb-4 {
     margin-bottom: 40px !important;
 }
-.mb-5{
+
+.mb-5 {
     margin-bottom: 50px !important;
 }
-.mb-6{
+
+.mb-6 {
     margin-bottom: 60px !important;
 }
-.mb-7{
+
+.mb-7 {
     margin-bottom: 70px !important;
 }
-.btn{
+
+.btn {
     font-size: 13px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.07em;
     padding: 10px 20px;
 }
-.form-control{
+
+.form-control {
     border-radius: 6px;
 }
-.form-control.form-control-lg{
+
+.form-control.form-control-lg {
     min-height: 70px;
     padding: 15px 25px;
 }
-.btn-primary{
+
+.btn-primary {
     background-color: #ff7a1a !important;
     border-color: #ff7a1a !important;
 }
-.btn-primary:hover, .btn-primary:focus{
+
+.btn-primary:hover,
+.btn-primary:focus {
     background-color: #f48d43 !important;
     border-color: #f48d43 !important;
 }
-.homePage{
+
+.homePage {
     /* background-color: #726cf1; */
     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#726cf1+44,726cf1+44,9269ea+100 */
-background: linear-gradient(135deg,  rgba(114,108,241,1) 44%,rgba(114,108,241,1) 44%,rgba(146,105,234,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: linear-gradient(135deg, rgba(114, 108, 241, 1) 44%, rgba(114, 108, 241, 1) 44%, rgba(146, 105, 234, 1) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 
 
-   min-height: 100vh;
+    min-height: 100vh;
 }
-.validationForm .form-control{
+
+.validationForm {
+    background-color: #fff;
+    border-radius: 35px;
+    overflow: hidden;
+    box-shadow: rgb(111 81 216) 0px 5px 10px;
+}
+
+.validationForm .form-control {
     border: none;
     box-shadow: none;
+    color: #092540;
+    background-color: transparent;
 }
-.validationForm .btn{
+
+.validationForm .form-control::-moz-placeholder {
+    color: #cac8f3;
+}
+
+.validationForm .form-control::placeholder {
+    color: #cac8f3;
+}
+
+.validationForm .btn {
     border: none;
+    border-radius: 35px !important;
+    margin: 10px;
+    padding: 10px 15px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
-.leftCol{
+
+.leftCol {
     width: 118px;
     min-width: 118px;
     background-color: #fff;
 }
-.leftCol ul{
+
+.leftCol ul {
     list-style: none;
     padding: 20px;
 }
-.leftCol ul li{
-   text-align: center;
-   font-size: 12px;
-   margin: 20px 0;
+
+.leftCol ul li {
+    text-align: center;
+    font-size: 12px;
+    margin: 20px 0;
 }
-.rightCol{
+
+.rightCol {
     background-color: #edf3fb;
     width: 100%;
     padding: 30px 5vw;
 }
-.cardBox{
+
+.cardBox {
     border-radius: 6px;
     padding: 25px 25px 5px 25px;
     border: 1px solid rgba(9, 37, 64, .2);
 }
+
 dt {
     flex-shrink: 0;
     width: 40%;
     padding-right: 20px;
-    color: rgba(9,37,64,.6);
+    color: rgba(9, 37, 64, .6);
 }
+
 dd {
     flex-grow: 1;
     overflow: hidden;
     word-wrap: break-word;
     color: #092540;
 }
-.exampleLink{
+
+.exampleLink {
     opacity: 0.6;
-}
-.validationForm {
-    background-color: #fff;
-    border-radius: 35px;
-    overflow: hidden;
-    box-shadow: rgb(111 81 216) 0px 5px 10px;
 }

@@ -37,16 +37,28 @@ export default function Validatorform() {
                     let index = newValue.indexOf('/')
                     let finalUrl = newValue.slice(0, index)
                     var parsed = psl.parse(finalUrl)
-                    router.push(
-                        `/result/${parsed.domain}`,
-                    )
+                    if(parsed.subdomain === null){
+                        router.push(
+                            `/result/${parsed.domain}`,
+                        )
+                    }
+                    else{
+                        alert('Sub domain not allow')
+                    }
+                    
                    
                 }
                 if (!newValue.match('/')) {
                     var parsed = psl.parse(newValue)
-                    router.push(
-                        `/result/${parsed.domain}`,
-                    )
+                    if(parsed.subdomain === null){
+                        router.push(
+                            `/result/${parsed.domain}`,
+                        )
+                    }
+                    else{
+                        alert('Sub domain not allow')
+                    }
+                    
                    
                 }
 
