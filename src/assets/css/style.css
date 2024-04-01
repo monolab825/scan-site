@@ -98,6 +98,13 @@ h5,
 .mb-7 {
     margin-bottom: 70px !important;
 }
+.mb-10 {
+    margin-bottom: 100px !important;
+}
+
+h2 .material-symbols-outlined{
+    font-size: 35px;
+}
 
 .btn {
     font-size: 13px;
@@ -241,7 +248,34 @@ dd {
 .websiteImg:hover .webImg {
     top: -100%;
 }
-
+.ul{
+    padding: 0;
+    margin: 0;
+}
+li{
+    list-style: none;
+}
+.brokenLinkList li{
+    padding: 16px 20px;
+    color: #092540;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(9,37,64,.08);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+.brokenUrl{
+    word-break: break-all;
+    width: calc(100% - 32px);
+}
+.whiteBox{
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(9,37,64,.08);
+    border-radius: 8px;
+    padding: 16px 20px;
+}
 @media (max-width: 1199.98px) {
     h1,
     .h1 {
