@@ -5,9 +5,12 @@ html {
 img {
     max-width: 100%;
 }
-body, html{
+
+body,
+html {
     overflow-x: hidden;
 }
+
 body {
     height: 100vh;
     color: rgba(9, 37, 64, .6);
@@ -98,11 +101,12 @@ h5,
 .mb-7 {
     margin-bottom: 70px !important;
 }
+
 .mb-10 {
     margin-bottom: 100px !important;
 }
 
-h2 .material-symbols-outlined{
+h2 .material-symbols-outlined {
     font-size: 35px;
 }
 
@@ -177,7 +181,7 @@ h2 .material-symbols-outlined{
 .leftCol {
     width: 118px;
     min-width: 118px;
-    background-color: #fff;
+    background-color: rgb(114 108 241);
 }
 
 .leftContent {
@@ -194,7 +198,7 @@ h2 .material-symbols-outlined{
     text-align: center;
     font-size: 11px;
     margin: 25px 0;
-    color: rgb(9 37 64 / 40%);
+    color: rgb(255 255 255 / 79%);
     font-weight: 500;
 }
 
@@ -204,7 +208,7 @@ h2 .material-symbols-outlined{
 }
 
 .rightCol {
-    background-color: #edf3fb;
+    background-color: #ffffff;
     width: 100%;
     padding: 30px 5vw;
 }
@@ -248,35 +252,44 @@ dd {
 .websiteImg:hover .webImg {
     top: -100%;
 }
-.ul{
+
+.ul {
     padding: 0;
     margin: 0;
 }
-li{
+
+li {
     list-style: none;
 }
-.brokenLinkList li{
+
+.brokenLinkList li {
     padding: 16px 20px;
     color: #092540;
     background-color: #fff;
-    box-shadow: 0 4px 8px rgba(9,37,64,.08);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     border-radius: 8px;
     margin-bottom: 8px;
     display: flex;
     justify-content: space-between;
     gap: 15px;
 }
-.brokenUrl{
+
+.brokenUrl {
     word-break: break-all;
     width: calc(100% - 32px);
 }
-.whiteBox{
+
+.whiteBox {
     background-color: #fff;
-    box-shadow: 0 4px 8px rgba(9,37,64,.08);
+    box-shadow: 0 4px 8px rgba(9, 37, 64, .08);
     border-radius: 8px;
     padding: 16px 20px;
 }
+.progress-bar{
+    background-color: #ff7a1a;
+}
 @media (max-width: 1199.98px) {
+
     h1,
     .h1 {
         font-size: 30px;
@@ -286,31 +299,33 @@ li{
     .h2 {
         font-size: 23px;
     }
-   
+
 }
 
-@media (max-width: 991.98px) {
-   
-    
-}
+@media (max-width: 991.98px) {}
 
 
 @media (max-width: 767.98px) {
-    .rightCol{
+    .rightCol {
         padding-left: 0;
         padding-right: 0;
     }
-    .container-fluid, .container{
+
+    .container-fluid,
+    .container {
         padding-left: 20px;
         padding-right: 20px;
     }
-    .ratingInfo p{
+
+    .ratingInfo p {
         font-size: 13px;
     }
-    .ratingInfo h2{
+
+    .ratingInfo h2 {
         font-size: 17px;
     }
-    .ratingInfo h5{
+
+    .ratingInfo h5 {
         font-size: 14px;
     }
 }
