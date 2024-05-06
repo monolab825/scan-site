@@ -143,9 +143,10 @@ h2 .material-symbols-outlined {
     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#726cf1+44,726cf1+44,9269ea+100 */
     background: linear-gradient(135deg, rgba(114, 108, 241, 1) 44%, rgba(114, 108, 241, 1) 44%, rgba(146, 105, 234, 1) 100%);
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-
-
     min-height: 100vh;
+}
+.text-primary{
+    color: #726cf1 !important;
 }
 
 .validationForm {
@@ -291,6 +292,20 @@ li {
 }
 .progress-bar{
     background: linear-gradient(135deg, rgba(114, 108, 241, 1) 44%, rgba(114, 108, 241, 1) 44%, rgba(146, 105, 234, 1) 100%);
+}
+.svgLoader svg{
+    width: 100%;
+}
+.table tbody tr td:first-child{
+    padding-left: 0;
+}
+.table tbody tr:last-child td{
+    border-bottom: none;
+}
+.table > :not(caption) > * > *{
+    border-bottom-color: #f2f2f2;
+    font-size: 13px;
+    padding: 12px;
 }
 @media (max-width: 1199.98px) {
 

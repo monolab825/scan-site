@@ -1,6 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
+import { Dotloader, Codeloader } from '@/components/Loader';
 
 export default function Page({ params }) {
   var moment = require('moment');
@@ -15,10 +16,22 @@ export default function Page({ params }) {
   const [robotsData, setRobotsData] = useState(null)
   const [globalranking, setGlobalranking] = useState(null)
   const [reviews, setReviews] = useState(null)
+  const [risk, setRisk] = useState(null)
   const [seo, setSeo] = useState(null)
 
 
 
+  useEffect(() => {
+    fetchHostingData()
+    fetchAudienceData()
+    fetchBrokenLinksData()
+    fetchSitemapData()
+    fetchRobotsData()
+    fetchGlobalrankingData()
+    fetchReviewsData()
+    fetchRiskData()
+    // fetchSeoData()
+  }, [])
 
 
 
@@ -34,7 +47,7 @@ export default function Page({ params }) {
     } catch (error) {
       console.log(error);
     }
-    
+
   }
 
   // audience data
@@ -111,13 +124,13 @@ export default function Page({ params }) {
     } catch (error) {
       console.log(error);
     }
-    
+
   }
 
   // review data
   const fetchReviewsData = async () => {
     try {
-      let result = await fetch(`${process.env.HOST}/api/v1/scan-report`, {
+      let result = await fetch(`${process.env.HOST}/api/v1/scan-user-rating`, {
         method: 'POST',
         body: JSON.stringify({ url })
       })
@@ -126,7 +139,7 @@ export default function Page({ params }) {
     } catch (error) {
       console.log(error);
     }
-    
+
   }
 
   // review data
@@ -141,19 +154,21 @@ export default function Page({ params }) {
     } catch (error) {
       console.log(error);
     }
-    
   }
 
-  useEffect(() => {
-    fetchHostingData()
-    fetchAudienceData()
-    fetchBrokenLinksData()
-    fetchSitemapData()
-    fetchRobotsData()
-    fetchGlobalrankingData()
-    // fetchReviewsData()
-    // fetchSeoData()
-  }, [])
+  // Risk data
+  const fetchRiskData = async () => {
+    try {
+      let result = await fetch(`${process.env.HOST}/api/v1/scan-risk-score`, {
+        method: 'POST',
+        body: JSON.stringify({ url })
+      })
+      result = await result.json()
+      setRisk(result)
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -168,6 +183,7 @@ export default function Page({ params }) {
 
               <li><a href='#audience'><i className="material-symbols-outlined">group</i>Audience</a></li>
               <li><a href='#brokenLinks'><i className="material-symbols-outlined">link_off</i>Broken Links</a></li>
+              <li><a href='#risk'><i className="material-symbols-outlined">readiness_score</i>Risk Analysis</a></li>
 
             </ul>
           </div>
@@ -181,6 +197,7 @@ export default function Page({ params }) {
               <div className='row gx-5'>
                 {/* hostingData */}
                 <div className='col-lg-5 mb-4'>
+                  <h1 className='fw-medium'>{url}</h1>
                   {hostingData !== null ?
                     <div>
                       <h1 className='mb-2'>{hostingData.domain_name}</h1>
@@ -217,7 +234,7 @@ export default function Page({ params }) {
                         </dl>
                       </div>
                     </div>
-                    : null
+                    : <div className='svgLoader'>{Codeloader()}</div>
                   }
                 </div>
 
@@ -254,7 +271,7 @@ export default function Page({ params }) {
                       <p className='mb-05'><small><i className="material-symbols-outlined smallIcon">editor_choice</i> Global Rank</small></p>
                       {globalranking !== null ?
                         <h2 className='mb-05 fw-medium'>#{globalranking.data.global_rank}</h2>
-                        : null
+                        : Dotloader()
                       }
                     </div>
                     <div>
@@ -262,21 +279,24 @@ export default function Page({ params }) {
 
                       {brokenLinks?.success === true ?
                         brokenLinks.data.urls.length === 0 ?
-                          <h2 className='mb-05 fw-medium'>PASSED</h2>
+                          <h2 className='mb-05 fw-medium text-success'>PASSED</h2>
                           :
                           <h2 className='mb-05 fw-medium text-danger'>{brokenLinks.data.urls.length} found</h2>
                         :
-                        null
+                        Dotloader()
                       }
 
                     </div>
-                    {/* <div>
-                    <p className='mb-05'><small><i className="material-symbols-outlined smallIcon">editor_choice</i> User Reviews</small></p>
-                    {reviews !== null ?
-                      <h2 className='mb-05 fw-medium'>{reviews.data.rating}</h2>
-                      : null
-                    }
-                  </div> */}
+                    <div>
+                      <p className='mb-05'><small><i className="material-symbols-outlined smallIcon">star</i> User Reviews</small></p>
+                      {reviews !== null ?
+                        <div className='d-flex gap-2 align-items-center'>
+                          <h2 className='mb-05 fw-medium text-warning'>{reviews.data.rating}</h2>
+                          <h5 className='mb-0'>({reviews.data.review_count})</h5>
+                        </div>
+                        : Dotloader()
+                      }
+                    </div>
 
                   </div>
                 </div>
@@ -288,17 +308,17 @@ export default function Page({ params }) {
 
             <div className='d-flex gap-5 ratingInfo mb-10'>
               <div>
-                <p className='mb-05'><small><i className="material-symbols-outlined smallIcon">editor_choice</i> Sitemap (Image | Url)</small></p>
+                <p className='mb-05'><small><i className="material-symbols-outlined smallIcon">account_tree</i> Sitemap (Image | Url)</small></p>
                 {sitemapData !== null ?
                   <h2 className='mb-05 fw-medium'>#{sitemapData.data.image_count} | #{sitemapData.data.url_count}</h2>
-                  : null
+                  : Dotloader()
                 }
               </div>
               <div>
-                <p className='mb-05'><small><i className="material-symbols-outlined smallIcon">editor_choice</i> Robots Scan</small></p>
+                <p className='mb-05'><small><i className="material-symbols-outlined smallIcon">sensors</i> Robots Scan</small></p>
                 {robotsData !== null ?
-                  robotsData.success === true ? <h2 className='mb-05 fw-medium'>PASSED</h2> : <h2 className='mb-05 fw-medium'>FAILED</h2>
-                  : null
+                  robotsData.success === true ? <h2 className='mb-05 fw-medium'>PASSED</h2> : <h2 className='mb-05 fw-medium text-danger'>FAILED</h2>
+                  : Dotloader()
                 }
               </div>
             </div>
@@ -374,7 +394,7 @@ export default function Page({ params }) {
 
 
             {/* Broken Links */}
-            <div id='brokenLinks'>
+            <div id='brokenLinks' className='mb-10'>
               <h2 className='mb-3'><span className="material-symbols-outlined">link_off</span> Broken Links</h2>
               {brokenLinks !== null ?
                 <ul className='brokenLinkList'>
@@ -386,8 +406,111 @@ export default function Page({ params }) {
                 : null}
             </div>
 
-            
+            {/* Risk */}
+            <div id='risk' className='mb-10'>
+              <h2 className='mb-4'><span className="material-symbols-outlined">readiness_score</span> Risk Analysis</h2>
+              {risk !== null ?
+                risk.success === true ?
 
+                  <>
+                    <div className='d-flex justify-content-between gap-3 mb-5'>
+                      <div className='whiteBox flex-fill'>
+                        <p className="mb-05"><small>Risk Analysis</small></p>
+                        <h4 className="mb-05 fw-medium">{risk.data.unsafe === false ? <span className='text-success'>Safe</span> : <span className='text-danger'>Unsafe</span>}</h4>
+                      </div>
+                      <div className='whiteBox flex-fill'>
+                        <p className="mb-05"><small>Risk Score</small></p>
+                        <h4 className="mb-05 fw-medium">{risk.data.risk_score}</h4>
+                      </div>
+                      <div className='whiteBox flex-fill'>
+                        <p className="mb-05"><small>Malware</small></p>
+                        <h4 className="mb-05 fw-medium">{risk.data.malware === false ? <span className='text-success'>No malware found</span> : <span className='text-danger'>Malware found</span>}</h4>
+                      </div>
+                      <div className='whiteBox flex-fill'>
+                        <p className="mb-05"><small>Domain Rank</small></p>
+                        <h4 className="mb-05 fw-medium">#{risk.data.domain_rank}</h4>
+                      </div>
+                      <div className='whiteBox flex-fill'>
+                        <p className="mb-05"><small>IP Address</small></p>
+                        <h4 className="mb-05 fw-medium">{risk.data.ip_address}</h4>
+                      </div>
+                    </div>
+
+                    <div className='row'>
+                      <div className='col-md-6 mb-3'>
+                        <div className='whiteBox'>
+                          <table className='table'>
+                            <tbody>
+                              <tr>
+                                <td>Dmarc Record</td>
+                                <td>{risk.data.dmarc_record === true ? <strong>True</strong> : <strong>False</strong>}</td>
+                              </tr>
+                              <tr>
+                                <td>DNS Valid</td>
+                                <td>{risk.data.dns_valid === true ? <strong>True</strong> : <strong>False</strong>}</td>
+                              </tr>
+                              <tr>
+                                <td>Hosted Content</td>
+                                <td>{risk.data.hosted_content === true ? <strong>True</strong> : <strong>False</strong>}</td>
+                              </tr>
+                              <tr>
+                                <td>Parking</td>
+                                <td>{risk.data.parking === true ? <strong>True</strong> : <strong>False</strong>}</td>
+                              </tr>
+                              <tr>
+                                <td>Phishing</td>
+                                <td>{risk.data.phishing === true ? <strong>True</strong> : <strong>False</strong>}</td>
+                              </tr>
+                              <tr>
+                                <td>Redirected</td>
+                                <td>{risk.data.redirected === true ? <strong>True</strong> : <strong>False</strong>}</td>
+                              </tr>
+
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div className='col-md-6'>
+                        <div className='whiteBox'>
+                          <table className='table'>
+                            <tbody>
+
+                              <tr>
+                                <td>Risky tld</td>
+                                <td>{risk.data.risky_tld === true ? <strong>True</strong> : <strong>False</strong>}</td>
+                              </tr>
+                              <tr>
+                                <td>Short Link Redirect</td>
+                                <td>{risk.data.short_link_redirect === true ? <strong>True</strong> : <strong>False</strong>}</td>
+                              </tr>
+                              <tr>
+                                <td>Spamming</td>
+                                <td>{risk.data.spamming === true ? <strong>True</strong> : <strong>False</strong>}</td>
+                              </tr>
+                              <tr>
+                                <td>SPF Record</td>
+                                <td>{risk.data.spf_record === true ? <strong>True</strong> : <strong>False</strong>}</td>
+                              </tr>
+                              <tr>
+                                <td>Suspicious</td>
+                                <td>{risk.data.suspicious === true ? <strong>True</strong> : <strong>False</strong>}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+
+                  </>
+                  : null
+                : null
+              }
+            </div>
+
+            {console.log(risk)}
 
 
           </div>
