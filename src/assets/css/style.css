@@ -247,12 +247,11 @@ dd {
     left: 16%;
     right: 16%;
     top: 6%;
+    bottom: 15%;
     transition: all 0.3s ease-in-out 0.1s;
 }
 
-.websiteImg:hover .webImg {
-    top: -100%;
-}
+
 
 .ul {
     padding: 0;
@@ -306,6 +305,12 @@ li {
     border-bottom-color: #f2f2f2;
     font-size: 13px;
     padding: 12px;
+}
+.imgLoader{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
 }
 @media (max-width: 1199.98px) {
 

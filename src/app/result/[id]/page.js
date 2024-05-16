@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Dotloader, Codeloader } from '@/components/Loader';
+import InnerHTML from 'dangerously-set-html-content'
 
 export default function Page({ params }) {
   var moment = require('moment');
@@ -17,6 +18,7 @@ export default function Page({ params }) {
   const [globalranking, setGlobalranking] = useState(null)
   const [reviews, setReviews] = useState(null)
   const [risk, setRisk] = useState(null)
+  const [speed, setSpeed] = useState(null)
   const [seo, setSeo] = useState(null)
 
 
@@ -30,6 +32,7 @@ export default function Page({ params }) {
     fetchGlobalrankingData()
     fetchReviewsData()
     fetchRiskData()
+    fetchSpeedData()
     // fetchSeoData()
   }, [])
 
@@ -170,6 +173,21 @@ export default function Page({ params }) {
     }
   }
 
+
+  // Speed data
+  const fetchSpeedData = async () => {
+    try {
+      let result = await fetch(`https://3wt3npqssj2lt337ulfvq2fr3e0yibjo.lambda-url.us-east-1.on.aws`, {
+        method: 'POST',
+        body: JSON.stringify({ url })
+      })
+      result = await result.json()
+      setSpeed(result)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
 
@@ -179,8 +197,9 @@ export default function Page({ params }) {
           <div className='leftContent'>
             <ul>
               <li><a href='#overview'>
-                <i className="material-symbols-outlined">home</i>Overview</a></li>
-
+                <i className="material-symbols-outlined">home</i>Overview</a>
+              </li>
+              <li><a href='#performance'><i className="material-symbols-outlined">swap_driving_apps_wheel</i>Performance</a></li>
               <li><a href='#audience'><i className="material-symbols-outlined">group</i>Audience</a></li>
               <li><a href='#brokenLinks'><i className="material-symbols-outlined">link_off</i>Broken Links</a></li>
               <li><a href='#risk'><i className="material-symbols-outlined">readiness_score</i>Risk Analysis</a></li>
@@ -190,9 +209,6 @@ export default function Page({ params }) {
         </div>
         <div className='rightCol'>
           <div className='container-fluid'>
-
-
-
             <div className='mb-7' id='overview'>
               <div className='row gx-5'>
                 {/* hostingData */}
@@ -203,10 +219,10 @@ export default function Page({ params }) {
                       <h1 className='mb-2'>{hostingData.domain_name}</h1>
                       <div className='cardBox'>
                         <dl>
-                          <div className='companyInfo d-flex'>
+                          {/* <div className='companyInfo d-flex'>
                             <dt>Company</dt>
-                            <dd>{hostingData.domain_name}</dd>
-                          </div>
+                            <dd>{hostingData.data.domain_name}</dd>
+                          </div> */}
                           <div className='companyInfo d-flex'>
                             <dt>Country</dt>
                             <dd>{hostingData.data.host.website_country}</dd>
@@ -245,12 +261,17 @@ export default function Page({ params }) {
                       <div className='col-lg-9'>
                         <div className='websiteImg position-relative overflow-hidden'>
                           <div className='webImg z-1'>
-                            <Image style={{ width: '100%', height: 'auto' }}
+                            {speed !== null ?
+                              speed.data?.success === true ?
+                                <InnerHTML html={speed.data.screenshot_tag} />
+                                : null
+                              : <div className='imgLoader'>{Dotloader()}</div>}
+                            {/* <Image style={{ width: '100%', height: 'auto' }}
                               src="/img/website.jpg"
                               width={700}
                               height={300}
                               alt="laptop"
-                            />
+                            /> */}
                           </div>
                           <div className='laptop position-relative z-2'>
                             <Image style={{ width: '100%', height: 'auto' }}
@@ -306,6 +327,8 @@ export default function Page({ params }) {
 
 
 
+
+
             <div className='d-flex gap-5 ratingInfo mb-10'>
               <div>
                 <p className='mb-05'><small><i className="material-symbols-outlined smallIcon">account_tree</i> Sitemap (Image | Url)</small></p>
@@ -323,6 +346,40 @@ export default function Page({ params }) {
               </div>
             </div>
 
+            {/* Speed */}
+            <div id='performance' className='mb-10'>
+              <h2 className='mb-3'><span className="material-symbols-outlined">swap_driving_apps_wheel</span> Performance</h2>
+              {speed !== null ?
+                speed.data?.success === true ?
+                  <>
+                    <div className='d-flex flex-wrap flex-lg-nowrap justify-content-between gap-3 mb-5'>
+                      <div className='whiteBox flex-fill'>
+                        <p className="mb-05"><small>Performance</small></p>
+                        <h4 className="mb-05 fw-medium">{speed.data.performance_score}</h4>
+                      </div>
+                      <div className='whiteBox flex-fill'>
+                        <p className="mb-05"><small>Cumulative Layout Shift</small></p>
+                        <h4 className="mb-05 fw-medium">{speed.data.cumulative_layout_shift}</h4>
+                      </div>
+
+                      <div className='whiteBox flex-fill'>
+                        <p className="mb-05"><small>First Contentful Paint</small></p>
+                        <h4 className="mb-05 fw-medium">{speed.data.first_contentful_paint}</h4>
+                      </div>
+                      <div className='whiteBox flex-fill'>
+                        <p className="mb-05"><small>Largets Contentful Paint</small></p>
+                        <h4 className="mb-05 fw-medium">
+                          {speed.data.largets_contentful_paint}
+                        </h4>
+                      </div>
+                    </div>
+                  </>
+
+
+                  : null
+                : Dotloader()}
+            </div>
+
 
 
             {/* Audience */}
@@ -332,7 +389,7 @@ export default function Page({ params }) {
                 audienceData.data.error ? <p>{audienceData.data.error}</p>
                   :
                   <>
-                    <div className='d-flex justify-content-between gap-3 mb-5'>
+                    <div className='d-flex flex-wrap flex-lg-nowrapjustify-content-between gap-3 mb-5'>
                       <div className='whiteBox flex-fill'>
                         <p className="mb-05"><small>Alexa Rank</small></p>
                         <h4 className="mb-05 fw-medium">{audienceData.data.alexa_rank}</h4>
@@ -399,7 +456,7 @@ export default function Page({ params }) {
               {brokenLinks !== null ?
                 <ul className='brokenLinkList'>
 
-                  {brokenLinks?.success === true ? brokenLinks.data.urls.map((item, index) => (
+                  {brokenLinks?.urls?.length > 0 ? brokenLinks.data.urls.map((item, index) => (
                     <li key={index}><span className='brokenUrl'>{item.url}</span> <span className='statusCode text-danger fw-medium'>{item.status_code}</span></li>
                   )) : '0 Broken link found'}
                 </ul>
@@ -413,7 +470,7 @@ export default function Page({ params }) {
                 risk.success === true ?
 
                   <>
-                    <div className='d-flex justify-content-between gap-3 mb-5'>
+                    <div className='d-flex flex-wrap flex-lg-nowrap justify-content-between gap-3 mb-5'>
                       <div className='whiteBox flex-fill'>
                         <p className="mb-05"><small>Risk Analysis</small></p>
                         <h4 className="mb-05 fw-medium">{risk.data.unsafe === false ? <span className='text-success'>Safe</span> : <span className='text-danger'>Unsafe</span>}</h4>
@@ -500,17 +557,18 @@ export default function Page({ params }) {
                         </div>
                       </div>
                     </div>
-
-
-
-
                   </>
                   : null
                 : null
               }
             </div>
 
-            {console.log(risk)}
+
+
+
+
+
+            {console.log(hostingData)}
 
 
           </div>
